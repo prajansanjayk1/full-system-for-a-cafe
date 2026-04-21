@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section class="max-w-6xl mx-auto px-4 py-12"><h1 class="text-3xl font-bold mb-6">Results</h1><div class="grid md:grid-cols-3 gap-4">{% for result in results %}<article class="bg-white p-4 rounded-xl shadow"><h2 class="font-semibold">{{ result.student_name }}</h2><p>{{ result.subject }}</p><p class="text-sm">{{ result.before_marks }} → {{ result.after_marks }}</p></article>{% endfor %}</div></section>{% endblock %}

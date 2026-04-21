@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{{ meta_title|default:'Coaching Institute' }}{% endblock %}</title>
+    <meta name="description" content="{{ meta_description|default:'Premium tuition and coaching institute.' }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { colors: { brand: '#f97316' } } } }
+    </script>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+<body class="bg-gray-50 text-gray-800">
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="text-xl font-bold text-brand">{{ site_settings.institute_name|default:'Institute' }}</a>
+        <div class="hidden md:flex gap-5 text-sm font-medium">
+            <a href="/about/">About</a><a href="/courses/">Courses</a><a href="/subjects/">Subjects</a>
+            <a href="/results/">Results</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a>
+        </div>
+        <a href="/registration/" class="bg-brand text-white px-4 py-2 rounded-lg">Book Free Demo Class</a>
+    </nav>
+</header>
+<main class="min-h-screen">
+    {% if messages %}
+      <div class="max-w-5xl mx-auto px-4 pt-4">
+      {% for message in messages %}
+        <div class="bg-green-100 border border-green-300 text-green-700 p-3 rounded mb-2">{{ message }}</div>
+      {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+</main>
+<footer class="bg-white border-t mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-8 text-sm text-gray-600">
+        <p>{{ site_settings.address|default:'Tambaram, Chennai' }}</p>
+        <p>Call: {{ site_settings.phone|default:'+91-00000-00000' }} | Email: {{ site_settings.email|default:'info@example.com' }}</p>
+    </div>
+</footer>
+</body>
+</html>

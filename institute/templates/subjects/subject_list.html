@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section class="max-w-7xl mx-auto px-4 py-12"><h1 class="text-3xl font-bold mb-6">Subjects</h1><div class="grid md:grid-cols-3 gap-5">{% for subject in subjects %}<a href="{{ subject.get_absolute_url }}" class="bg-white rounded-xl shadow p-4"><img src="{{ subject.image.url }}" alt="{{ subject.name }}" class="h-40 w-full object-cover rounded"><h2 class="mt-3 font-semibold">{{ subject.name }}</h2></a>{% endfor %}</div></section>{% endblock %}

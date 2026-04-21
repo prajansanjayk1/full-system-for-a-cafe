@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="max-w-4xl mx-auto px-4 py-14">
+  <h1 class="text-3xl font-bold mb-4">About Us</h1>
+  <p class="text-gray-700 leading-8">{{ site_settings.about_content|default:'We focus on concept-based learning, continuous feedback, and student confidence building.' }}</p>
+</section>
+{% endblock %}
