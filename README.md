@@ -42,6 +42,20 @@ docker compose exec web python manage.py seed_demo
 
 If Compose still fails because Docker is unavailable or unhealthy, use the non-Docker setup above; it is the supported contributor workflow for local feature development.
 
+## Local setup
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+Then run:
+
+```bash
+docker compose exec web python manage.py migrate
+docker compose exec web python manage.py seed_demo
+```
+
 ## Production checklist
 
 1. Set strong environment secrets and live Razorpay credentials.

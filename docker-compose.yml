@@ -54,6 +54,19 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    env_file: .env
+    depends_on: [postgres, redis]
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    ports: ["8000:8000"]
+  worker:
+    build: .
+    env_file: .env
+    depends_on: [postgres, redis]
+    command: celery -A config worker -l INFO
+  beat:
+    build: .
+    env_file: .env
+    depends_on: [postgres, redis]
     command: celery -A config beat -l INFO
   postgres:
     image: postgres:16-alpine
@@ -89,3 +102,12 @@ volumes:
   postgres-data:
   redis-data:
   static-data:
+
+  nginx:
+    image: nginx:1.25-alpine
+    volumes: ["./deploy/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro"]
+    ports: ["80:80"]
+    depends_on: [web]
+volumes:
+  postgres-data:
+  redis-data:
