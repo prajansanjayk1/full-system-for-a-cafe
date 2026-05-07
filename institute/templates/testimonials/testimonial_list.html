@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section class="max-w-6xl mx-auto px-4 py-12"><h1 class="text-3xl font-bold mb-6">Testimonials</h1><div class="grid md:grid-cols-3 gap-4">{% for t in testimonials %}<article class="bg-white p-5 rounded-xl shadow"><p>“{{ t.content }}”</p><p class="font-semibold mt-3">{{ t.name }}</p><p class="text-sm text-gray-500">{{ t.role }}</p></article>{% endfor %}</div></section>{% endblock %}

@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section class="max-w-7xl mx-auto px-4 py-12"><h1 class="text-3xl font-bold mb-6">Blog</h1><div class="grid md:grid-cols-3 gap-5">{% for post in posts %}<a href="{{ post.get_absolute_url }}" class="bg-white rounded-xl p-4 shadow"><img src="{{ post.image.url }}" alt="{{ post.title }}" class="h-40 w-full object-cover rounded"><h2 class="font-semibold mt-3">{{ post.title }}</h2><p class="text-sm text-gray-500">{{ post.published_at|date:'M d, Y' }}</p></a>{% endfor %}</div></section>{% endblock %}

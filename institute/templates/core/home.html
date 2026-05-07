@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <h1 class="text-4xl font-bold mb-4">{{ site_settings.hero_heading|default:'Concept clarity for school success' }}</h1>
+  <p class="text-lg text-gray-600 mb-6">{{ site_settings.hero_subheading|default:'Structured coaching for Class 9 to 12 students in Tambaram.' }}</p>
+  <a class="bg-brand text-white px-6 py-3 rounded-lg" href="/registration/">Register for Free Demo</a>
+</section>
+<section class="max-w-7xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-semibold mb-4">Student Improvement Highlights</h2>
+  <div class="grid md:grid-cols-3 gap-4">{% for item in results %}<article class="bg-white p-4 rounded-xl shadow"><h3 class="font-semibold">{{ item.student_name }}</h3><p>{{ item.subject }}</p><p>{{ item.before_marks }} → <span class="text-brand font-bold">{{ item.after_marks }}</span></p></article>{% endfor %}</div>
+</section>
+<section class="max-w-7xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-semibold mb-4">Courses</h2>
+  <div class="grid md:grid-cols-3 gap-4">{% for course in courses %}<a href="{{ course.get_absolute_url }}" class="bg-white p-4 rounded-xl shadow"><img src="{{ course.image.url }}" alt="{{ course.title }}" class="w-full h-40 object-cover rounded"><h3 class="mt-3 font-semibold">{{ course.title }}</h3><p class="text-sm">{{ course.class_level }}</p></a>{% endfor %}</div>
+</section>
+{% endblock %}

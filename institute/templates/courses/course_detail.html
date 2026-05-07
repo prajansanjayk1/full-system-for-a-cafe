@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section class="max-w-4xl mx-auto px-4 py-12"><img src="{{ course.image.url }}" alt="{{ course.title }}" class="w-full h-72 object-cover rounded-xl mb-6"><h1 class="text-3xl font-bold">{{ course.title }}</h1><p class="text-brand font-medium">{{ course.class_level }}</p><p class="mt-4 leading-8">{{ course.description }}</p></section>{% endblock %}
