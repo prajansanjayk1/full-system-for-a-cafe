@@ -21,3 +21,7 @@ Recommended stages:
 ## Scaling
 
 Scale `web` horizontally behind the load balancer. Scale Celery by queue (`payments`, `analytics`, `notifications`) as traffic grows. Partition high-volume tables such as `orders_order`, `orders_orderitem`, and `core_auditlog` by tenant and/or month when write volume requires it.
+
+## Docker notes
+
+The Compose stack is optional for local development, but it is kept production-like for integration testing. It includes PostgreSQL and Redis health checks, web health checks, automatic web migrations through `scripts/entrypoint.sh`, a non-root runtime user, and a shared static volume mounted into Nginx. If Docker is unavailable on a workstation, use `docs/local-development.md` rather than blocking feature work on Compose.

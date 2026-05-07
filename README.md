@@ -10,6 +10,38 @@ Production-oriented Django modular monolith for multi-tenant restaurant operatio
 - **Async workloads:** Celery + Redis handles webhook processing, scheduled preorder activation, notifications, and analytics aggregation.
 - **Performance:** strategic compound indexes, precomputed analytics tables, `select_related`/`prefetch_related`, stateless web containers, and Redis caching.
 
+## Recommended local setup without Docker
+
+Use this path if Docker Desktop/Compose is not working on your machine. It uses SQLite and Django's in-memory cache so PostgreSQL and Redis are not required for basic development.
+
+```bash
+cp .env.local.example .env
+./scripts/bootstrap_local.sh
+./scripts/run_local.sh
+```
+
+Then open:
+
+```text
+http://localhost:8000/healthz/
+```
+
+## Optional Docker setup
+
+Docker is still supported for a production-like stack, but it is no longer required for local development.
+
+```bash
+docker compose up --build
+```
+
+The Compose stack now provides default environment values, PostgreSQL/Redis health checks, automatic migrations, static collection, a `/healthz/` health check, and a shared static volume for Nginx. To seed demo data after the web container is healthy:
+
+```bash
+docker compose exec web python manage.py seed_demo
+```
+
+If Compose still fails because Docker is unavailable or unhealthy, use the non-Docker setup above; it is the supported contributor workflow for local feature development.
+
 ## Local setup
 
 ```bash
