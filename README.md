@@ -34,11 +34,13 @@ Docker is still supported for a production-like stack, but it is no longer requi
 docker compose up --build
 ```
 
-The Compose stack now provides default environment values, PostgreSQL/Redis health checks, automatic migrations, static collection, and a `/healthz/` health check. To seed demo data after the web container is healthy:
+The Compose stack now provides default environment values, PostgreSQL/Redis health checks, automatic migrations, static collection, a `/healthz/` health check, and a shared static volume for Nginx. To seed demo data after the web container is healthy:
 
 ```bash
 docker compose exec web python manage.py seed_demo
 ```
+
+If Compose still fails because Docker is unavailable or unhealthy, use the non-Docker setup above; it is the supported contributor workflow for local feature development.
 
 ## Production checklist
 

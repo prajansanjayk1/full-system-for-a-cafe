@@ -1,6 +1,7 @@
 services:
   web:
     build: .
+    init: true
     environment: &app_env
       DJANGO_SETTINGS_MODULE: config.settings.production
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-dev-only-change-me}
@@ -24,12 +25,13 @@ services:
     volumes:
       - static-data:/app/staticfiles
     healthcheck:
-      test: ["CMD-SHELL", "python - <<'PY'\nimport urllib.request\nurllib.request.urlopen('http://127.0.0.1:8000/healthz/', timeout=3)\nPY"]
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz/', timeout=3)\""]
       interval: 15s
       timeout: 5s
       retries: 10
   worker:
     build: .
+    init: true
     environment:
       <<: *app_env
       RUN_MIGRATIONS: "0"
@@ -42,6 +44,7 @@ services:
     command: celery -A config worker -l INFO
   beat:
     build: .
+    init: true
     environment:
       <<: *app_env
       RUN_MIGRATIONS: "0"

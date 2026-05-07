@@ -15,7 +15,8 @@ COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
 COPY . .
-RUN useradd --system --create-home --uid 10001 appuser \
+RUN mkdir -p /app/staticfiles \
+    && useradd --system --create-home --uid 10001 appuser \
     && chown -R appuser:appuser /app
 USER appuser
 
